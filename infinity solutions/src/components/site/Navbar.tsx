@@ -33,9 +33,9 @@ export function Navbar() {
         scrolled ? "glass-strong shadow-elevated" : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto max-w-7xl px-6 lg:px-10 h-18 flex items-center justify-between py-4">
+      <nav className="mx-auto max-w-7xl px-6 lg:px-10 h-28 flex items-center justify-between py-2">
         <a href="#home" className="flex items-center group">
-          <img src={logoImage} alt="Infinity Solutions" className="h-12 w-auto object-contain" />
+          <img src={logoImage} alt="Infinity Solutions" className="h-24 w-auto object-contain" />
         </a>
 
         <ul className="hidden lg:flex items-center gap-1">

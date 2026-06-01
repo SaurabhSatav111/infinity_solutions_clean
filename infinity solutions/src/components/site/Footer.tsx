@@ -14,7 +14,7 @@ export function Footer() {
         <div className="grid lg:grid-cols-12 gap-10">
           <div className="lg:col-span-5">
             <a href="#home" className="inline-flex items-center bg-white px-3 py-1.5 rounded-lg shadow-glow">
-              <img src={logoImage} alt="Infinity Solutions" className="h-10 w-auto object-contain" />
+              <img src={logoImage} alt="Infinity Solutions" className="h-20 w-auto object-contain" />
             </a>
             <p className="mt-5 text-sm text-muted-foreground max-w-sm leading-relaxed">
               A one-stop designing, packaging & printing firm — 20+ years delivering speedy, specialized and sustainable solutions from Pune, India.
