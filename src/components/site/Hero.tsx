@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Play, ChevronDown, Cpu, Boxes, Zap } from "lucide-react";
+import { ArrowRight, Play, ChevronDown } from "lucide-react";
 import { lazy, Suspense, useEffect, useState } from "react";
 
 const HeroScene = lazy(() =>
@@ -23,7 +23,6 @@ export function Hero() {
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass text-xs font-medium text-muted-foreground mb-8"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             Packaging · Printing · Designing · Branding
           </motion.div>
 
@@ -67,19 +66,23 @@ export function Hero() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-12 grid grid-cols-3 max-w-md gap-6"
+            className="mt-12 grid grid-cols-2 sm:grid-cols-4 max-w-2xl gap-4"
           >
             {[
-              { k: "20+", v: "Years" },
-              { k: "9", v: "Services" },
-              { k: "100%", v: "Satisfaction" },
+              { k: "20+", v: "Years of Experience" },
+              { k: "500+", v: "Happy Clients" },
+              { k: "9", v: "Services Offered" },
+              { k: "100%", v: "Quality Assured" },
             ].map((s) => (
-              <div key={s.v}>
+              <div
+                key={s.v}
+                className="glass rounded-xl p-4 border border-primary/10 hover:border-primary/20 transition-all duration-300 flex flex-col justify-between"
+              >
                 <div className="font-display text-2xl font-bold text-gradient-orange">{s.k}</div>
-                <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1">{s.v}</div>
+                <div className="text-xs text-muted-foreground mt-1.5 leading-snug">{s.v}</div>
               </div>
             ))}
           </motion.div>
@@ -94,54 +97,6 @@ export function Hero() {
               </Suspense>
             )}
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5, duration: 0.7 }}
-            className="absolute top-6 left-2 glass-strong rounded-2xl p-4 w-56 animate-float"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-primary/15 flex items-center justify-center text-primary">
-                <Cpu className="w-5 h-5" />
-              </div>
-              <div>
-                <div className="text-xs text-muted-foreground">Throughput</div>
-                <div className="font-display font-semibold">12,480/hr</div>
-              </div>
-            </div>
-            <div className="mt-3 h-1.5 rounded-full bg-white/10 overflow-hidden">
-              <div className="h-full w-[78%] bg-gradient-primary" />
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.7 }}
-            className="absolute bottom-10 right-0 glass-strong rounded-2xl p-4 w-60 animate-float"
-            style={{ animationDelay: "1.2s" }}
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Boxes className="w-4 h-4 text-primary" />
-                <span className="text-xs uppercase tracking-widest text-muted-foreground">Live SKUs</span>
-              </div>
-              <span className="text-xs text-primary">●</span>
-            </div>
-            <div className="mt-2 font-display text-xl font-bold">2,914 units</div>
-            <div className="text-xs text-muted-foreground mt-0.5">Auto-routed to Line 04</div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.9, duration: 0.7 }}
-            className="absolute bottom-32 left-0 glass rounded-xl px-3 py-2 flex items-center gap-2"
-          >
-            <Zap className="w-3.5 h-3.5 text-primary" />
-            <span className="text-xs font-medium">99.98% uptime</span>
-          </motion.div>
         </div>
       </div>
 
