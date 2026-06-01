@@ -1,4 +1,5 @@
-import { Hexagon, Github, Linkedin, Twitter, Instagram, ArrowRight } from "lucide-react";
+import { Github, Linkedin, Twitter, Instagram, ArrowRight } from "lucide-react";
+import logoImage from "@/assets/logo.png";
 
 export function Footer() {
   const cols = [
@@ -12,13 +13,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid lg:grid-cols-12 gap-10">
           <div className="lg:col-span-5">
-            <a href="#home" className="flex items-center gap-2.5">
-              <span className="w-9 h-9 rounded-lg bg-gradient-primary shadow-glow flex items-center justify-center">
-                <Hexagon className="w-5 h-5 text-primary-foreground" strokeWidth={2.5} />
-              </span>
-              <span className="font-display font-bold text-lg">
-                Infinity<span className="text-gradient-orange">.</span>Solutions
-              </span>
+            <a href="#home" className="inline-flex items-center bg-white px-3 py-1.5 rounded-lg shadow-glow">
+              <img src={logoImage} alt="Infinity Solutions" className="h-10 w-auto object-contain" />
             </a>
             <p className="mt-5 text-sm text-muted-foreground max-w-sm leading-relaxed">
               A one-stop designing, packaging & printing firm — 20+ years delivering speedy, specialized and sustainable solutions from Pune, India.

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Hexagon } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logoImage from "@/assets/logo.png";
 
 const links = [
   { href: "#home", label: "Home" },
@@ -33,13 +34,8 @@ export function Navbar() {
       }`}
     >
       <nav className="mx-auto max-w-7xl px-6 lg:px-10 h-18 flex items-center justify-between py-4">
-        <a href="#home" className="flex items-center gap-2.5 group">
-          <span className="relative inline-flex items-center justify-center w-9 h-9 rounded-lg bg-gradient-primary shadow-glow">
-            <Hexagon className="w-5 h-5 text-primary-foreground" strokeWidth={2.5} />
-          </span>
-          <span className="font-display font-bold text-lg tracking-tight">
-            Infinity<span className="text-gradient-orange">.</span>Solutions
-          </span>
+        <a href="#home" className="flex items-center group">
+          <img src={logoImage} alt="Infinity Solutions" className="h-12 w-auto object-contain" />
         </a>
 
         <ul className="hidden lg:flex items-center gap-1">
