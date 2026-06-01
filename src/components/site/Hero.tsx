@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Play, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { lazy, Suspense, useEffect, useState } from "react";
 
 const HeroScene = lazy(() =>
@@ -8,7 +8,13 @@ const HeroScene = lazy(() =>
 
 export function Hero() {
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <section id="home" className="relative min-h-screen pt-28 pb-20 overflow-hidden bg-gradient-hero noise">
@@ -21,9 +27,9 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass text-xs font-medium text-muted-foreground mb-8"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass text-xs font-semibold text-muted-foreground mb-8"
           >
-            Packaging · Printing · Designing · Branding
+            Pune's Trusted Packaging Partner Since 2004
           </motion.div>
 
           <motion.h1
@@ -32,7 +38,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.05 }}
             className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.02] tracking-tight"
           >
-            Exceptional <span className="text-gradient-orange">packaging & printing</span> solutions
+            Premium <span className="text-gradient-orange">Packaging & Printing</span> Solutions for Growing Brands
           </motion.h1>
 
           <motion.p
@@ -41,28 +47,37 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.18 }}
             className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed"
           >
-            Infinity Solutions is a one-stop designing, packaging & printing firm — delivering
-            speedy, specialized and personalized solutions backed by 20+ years of experience.
+            Infinity Solutions is Pune's one-stop packaging and printing manufacturer — delivering monocartons, corrugated boxes, flexible printing, rigid boxes and branding solutions with 20+ years of expertise. Serving pharma, FMCG, food and retail businesses across India.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="mt-9 flex flex-wrap gap-3"
+            className="mt-9 flex flex-col gap-5"
           >
-            <a
-              href="#services"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-primary text-primary-foreground font-semibold shadow-glow hover:scale-[1.03] transition-transform"
-            >
-              Explore Services <ArrowRight className="w-4 h-4" />
-            </a>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl glass border border-primary/40 text-foreground font-semibold hover:bg-primary/10 transition-colors"
-            >
-              <Play className="w-4 h-4 text-primary" /> Get a Quote
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-primary text-primary-foreground font-semibold shadow-glow hover:scale-[1.03] transition-transform"
+              >
+                Get a Free Quote <ArrowRight className="w-4 h-4" />
+              </a>
+              <a
+                href="#services"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl glass border border-primary/40 text-foreground font-semibold hover:bg-primary/10 transition-colors"
+              >
+                View Our Services
+              </a>
+            </div>
+            
+            <div className="text-xs text-muted-foreground/80 flex flex-wrap items-center gap-x-3 gap-y-1 font-semibold">
+              <span>✅ No minimum order pressure</span>
+              <span className="text-muted-foreground/30">|</span>
+              <span>✅ Pan-India delivery</span>
+              <span className="text-muted-foreground/30">|</span>
+              <span>✅ Response within 2 hours</span>
+            </div>
           </motion.div>
 
           <motion.div
