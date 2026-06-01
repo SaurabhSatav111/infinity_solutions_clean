@@ -61,17 +61,14 @@ export function Contact() {
                 </div>
               ))}
 
-              <div className="relative h-56 rounded-2xl glass-strong overflow-hidden">
-                <div className="absolute inset-0 grid-texture opacity-60" />
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-12 h-12 mx-auto rounded-full bg-gradient-primary shadow-glow flex items-center justify-center animate-glow">
-                      <MapPin className="w-5 h-5 text-primary-foreground" />
-                    </div>
-                    <div className="mt-3 text-xs uppercase tracking-widest text-muted-foreground">Global Operations</div>
-                  </div>
-                </div>
+              <div className="relative h-56 rounded-2xl glass-strong overflow-hidden border border-border shadow-glow">
+                <iframe
+                  title="Infinity Solutions Location"
+                  src="https://maps.google.com/maps?q=Infinity%20Solutions,%20O10,%203rd%20Floor,%20Bharat%20Arcade,%20Near%20Pulgate%20Police%20Chowky,%20Pulgate,%20Camp,%20Pune,%20Maharashtra%20411001&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                  className="absolute inset-0 w-full h-full border-0 filter grayscale contrast-[1.1] opacity-90 hover:grayscale-0 transition-all duration-300"
+                  allowFullScreen
+                  loading="lazy"
+                />
               </div>
             </div>
           </Reveal>
