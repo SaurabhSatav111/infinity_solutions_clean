@@ -72,16 +72,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Infinity Solutions is a premium futuristic industrial company website showcasing advanced manufacturing and packaging solutions with immersive 3D visuals." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Infinity Solutions is a premium futuristic industrial company website showcasing advanced manufacturing and packaging solutions with immersive 3D visuals." },
+      { title: "Infinity Solutions — Packaging, Printing & Branding Manufacturer in Pune" },
+      { name: "description", content: "Infinity Solutions is a Pune-based packaging and printing manufacturer with 20+ years of experience. We offer monocartons, corrugated boxes, flexible printing, rigid boxes, food packaging and branding solutions across India." },
+      { name: "author", content: "Infinity Solutions, Pune" },
+      { name: "robots", content: "index, follow" },
+      { name: "geo.region", content: "IN-MH" },
+      { name: "geo.placename", content: "Pune, Maharashtra, India" },
+      { property: "og:title", content: "Infinity Solutions — Packaging & Printing Manufacturer in Pune" },
+      { property: "og:description", content: "20+ years of specialized packaging, printing and branding solutions delivered from Pune, India. Monocartons, corrugated boxes, flexible printing and more." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "Infinity Solutions is a premium futuristic industrial company website showcasing advanced manufacturing and packaging solutions with immersive 3D visuals." },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@InfinitySolPune" },
+      { name: "twitter:title", content: "Infinity Solutions — Packaging & Printing in Pune" },
+      { name: "twitter:description", content: "Pune's trusted packaging and printing manufacturer. 20+ years experience. Monocartons, corrugated boxes, flexible printing, rigid boxes and branding." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c9752bf4-293a-4472-8efb-4d9ff3aa70d3/id-preview-bdf7850e--25aef74a-5b18-4f2d-ab7c-f6df1800d6ff.lovable.app-1779968664428.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c9752bf4-293a-4472-8efb-4d9ff3aa70d3/id-preview-bdf7850e--25aef74a-5b18-4f2d-ab7c-f6df1800d6ff.lovable.app-1779968664428.png" },
     ],
@@ -103,6 +106,35 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Infinity Solutions",
+              "description": "Packaging, printing and branding manufacturer in Pune with 20+ years of experience.",
+              "url": "https://infinity-solutions-nine.vercel.app",
+              "telephone": "+91-9326112233",
+              "email": "info@infinitysolutions.in",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "O10, 3rd Floor, Bharat Arcade, Near Pulgate Police Chowky, Pulgate, Camp",
+                "addressLocality": "Pune",
+                "addressRegion": "Maharashtra",
+                "postalCode": "411001",
+                "addressCountry": "IN"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": "18.5204",
+                "longitude": "73.8567"
+              },
+              "openingHours": "Mo-Sa 09:00-18:00",
+              "priceRange": "₹₹"
+            })
+          }}
+        />
       </head>
       <body>
         {children}

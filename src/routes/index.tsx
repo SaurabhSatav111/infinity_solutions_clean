@@ -14,10 +14,10 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Infinity Solutions — Packaging, Printing & Branding Services in Pune" },
-      { name: "description", content: "Infinity Solutions is a one-stop designing, packaging and printing firm in Pune offering monocartons, corrugated boxes, food packaging, flexible printing, rigid boxes, branding and more." },
-      { property: "og:title", content: "Infinity Solutions — Packaging & Printing Services" },
-      { property: "og:description", content: "20+ years of exceptional packaging, printing and branding solutions delivered with speed, flexibility and sustainability." },
+      { title: "Infinity Solutions — Packaging, Printing & Branding Manufacturer in Pune" },
+      { name: "description", content: "Infinity Solutions is a Pune-based packaging and printing manufacturer with 20+ years of experience. We offer monocartons, corrugated boxes, flexible printing, rigid boxes, food packaging and branding solutions across India." },
+      { property: "og:title", content: "Infinity Solutions — Packaging & Printing Manufacturer in Pune" },
+      { property: "og:description", content: "20+ years of specialized packaging, printing and branding solutions delivered from Pune, India. Monocartons, corrugated boxes, flexible printing and more." },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
