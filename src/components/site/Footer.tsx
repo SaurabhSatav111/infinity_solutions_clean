@@ -19,6 +19,9 @@ export function Footer() {
             <p className="mt-5 text-sm text-muted-foreground max-w-sm leading-relaxed">
               A one-stop designing, packaging & printing firm — 20+ years delivering speedy, specialized and sustainable solutions from Pune, India.
             </p>
+            <div className="mt-4 text-sm text-muted-foreground">
+              Email: <a href="mailto:info@infinitysolutions.in" className="hover:text-primary transition-colors text-secondary-foreground/90 font-medium">info@infinitysolutions.in</a>
+            </div>
 
             <form onSubmit={(e) => e.preventDefault()} className="mt-7 glass rounded-xl p-1.5 flex items-center max-w-md">
               <input
