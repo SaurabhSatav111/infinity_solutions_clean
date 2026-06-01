@@ -1,15 +1,34 @@
 import { Reveal, SectionHeader } from "./Reveal";
-import { ArrowUpRight } from "lucide-react";
 import project1 from "@/assets/project1.jpg";
 import project2 from "@/assets/project2.jpg";
 import project3 from "@/assets/project3.jpg";
 import project4 from "@/assets/project4.jpg";
 
 const projects = [
-  { image: project1, t: "Helix Pack v3", d: "Modular sustainable packaging system deployed across 22 SKUs." },
-  { image: project2, t: "Aether Line", d: "Autonomous bottling line with self-calibrating vision QC." },
-  { image: project3, t: "Forge OS", d: "Plant-wide operating layer unifying 14 legacy machines." },
-  { image: project4, t: "Project Nova", d: "Carbon-negative composite tray launched with EU partners." },
+  {
+    image: project1,
+    t: "Pharmaceutical Monocartons",
+    d: "Custom printed monocartons for a Pune-based pharma company — 4-color offset printing with UV coating and serialization.",
+    tag: "Pharma · Monocartons",
+  },
+  {
+    image: project2,
+    t: "Food Grade Corrugated Boxes",
+    d: "Double-wall corrugated shipping boxes for an FMCG brand — food safe, moisture resistant, custom branded.",
+    tag: "FMCG · Corrugated Boxes",
+  },
+  {
+    image: project3,
+    t: "Premium Rigid Boxes",
+    d: "Luxury rigid boxes with magnetic closure for a retail brand's festive gift packaging line.",
+    tag: "Retail · Rigid Boxes",
+  },
+  {
+    image: project4,
+    t: "Flexible Stand-Up Pouches",
+    d: "Multilayer flexible pouches for a food startup — resealable zip-lock with high-barrier film for extended shelf life.",
+    tag: "Food & Beverage · Flexible Printing",
+  },
 ];
 
 export function Projects() {
@@ -18,35 +37,54 @@ export function Projects() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeader
           eyebrow="Selected Work"
-          title={<>Industrial projects, <span className="text-gradient-orange">delivered at scale</span></>}
+          title={<>Our <span className="text-gradient-orange">Work</span></>}
+          subtitle="A glimpse of packaging solutions we have delivered for our clients across industries."
         />
 
-        <div className="mt-14 grid lg:grid-cols-2 gap-6">
+        <div className="mt-14 grid md:grid-cols-2 gap-8">
           {projects.map((p, i) => (
             <Reveal key={p.t} delay={i * 0.06}>
-              <article className="group relative overflow-hidden rounded-3xl glass-strong border-border hover:border-primary/40 transition-all duration-500">
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={p.image}
-                    alt={p.t}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent opacity-60 pointer-events-none" />
-                </div>
-                <div className="p-7 flex items-start justify-between gap-6">
-                  <div>
-                    <h3 className="font-display text-2xl font-bold">{p.t}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground max-w-md">{p.d}</p>
+              <article className="group h-full relative overflow-hidden rounded-3xl glass-strong border border-border hover:border-primary/40 transition-all duration-500 flex flex-col justify-between">
+                <div>
+                  <div className="relative h-64 overflow-hidden border-b border-border/40">
+                    <img
+                      src={p.image}
+                      alt={p.t}
+                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent opacity-60 pointer-events-none" />
                   </div>
-                  <a href="#contact" className="shrink-0 w-11 h-11 rounded-xl glass flex items-center justify-center text-primary group-hover:bg-gradient-primary group-hover:text-primary-foreground transition-all">
-                    <ArrowUpRight className="w-5 h-5" />
+                  
+                  <div className="p-7">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                      {p.tag}
+                    </span>
+
+                    <h3 className="font-display text-2xl font-bold mt-4 text-foreground">{p.t}</h3>
+                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.d}</p>
+                  </div>
+                </div>
+
+                <div className="px-7 pb-7">
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-primary/30 hover:border-primary hover:bg-primary/5 text-sm font-semibold text-foreground transition-all duration-300 w-full shadow-sm hover:scale-[1.01] active:scale-[0.99]"
+                  >
+                    Request Similar
                   </a>
                 </div>
               </article>
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={0.3} className="mt-12 text-center">
+          <p className="text-sm text-muted-foreground/80 flex items-center justify-center gap-1.5 italic">
+            📷 Real project photos coming soon — contact us to discuss your requirements.
+          </p>
+        </Reveal>
       </div>
     </section>
   );
 }
+
