@@ -7,6 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 
 import appCss from "../styles.css?url";
 import { useScrollReveal } from "@/lib/useScrollReveal";
@@ -154,6 +155,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <MobileCTA />
       <a
         href="https://wa.me/919326112233"
         target="_blank"
@@ -169,5 +171,93 @@ function RootComponent() {
         </span>
       </a>
     </QueryClientProvider>
+  );
+}
+
+function MobileCTA() {
+  const [showCTA, setShowCTA] = useState(false);
+  const [contactVisible, setContactVisible] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const handleScroll = () => {
+      const nextShow = window.scrollY > 600 && !contactVisible;
+      setShowCTA(nextShow);
+    };
+
+    let rafId: number | null = null;
+    const onScroll = () => {
+      if (rafId !== null) {
+        return;
+      }
+      rafId = window.requestAnimationFrame(() => {
+        handleScroll();
+        rafId = null;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [contactVisible]);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
+      return;
+    }
+
+    const contactSection = document.querySelector("#contact");
+    if (!contactSection) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setContactVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(contactSection);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  const scrollToContact = () => {
+    const contactTarget = document.querySelector("#contact");
+    if (contactTarget) {
+      contactTarget.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  return (
+    <div className={showCTA ? "mobile-cta-bar is-visible" : "mobile-cta-bar"}>
+      <div className="mobile-cta-actions">
+        <a
+          className="mobile-cta-button whatsapp-button"
+          href="https://wa.me/919326112233"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          💬 WhatsApp Us
+        </a>
+        <button type="button" className="mobile-cta-button quote-button" onClick={scrollToContact}>
+          Get a Quote
+        </button>
+      </div>
+    </div>
   );
 }
