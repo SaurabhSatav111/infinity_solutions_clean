@@ -260,4 +260,63 @@
       background: var(--primary);
     }
   }
+
+  .scroll-progress-shell {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 9999;
+    pointer-events: none;
+    background: transparent;
+  }
+
+  .scroll-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--primary);
+    transition: width 0.1s linear;
+  }
+
+  .back-to-top-button {
+    position: fixed;
+    right: 24px;
+    bottom: 100px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 0.5px solid rgba(15, 23, 42, 0.12);
+    background: #ffffff;
+    color: var(--primary);
+    font-size: 18px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 60;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: none;
+  }
+
+  .back-to-top-button.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  @media (max-width: 768px) {
+    .back-to-top-button {
+      bottom: 80px;
+    }
+
+    .scroll-progress-shell {
+      z-index: 9999;
+    }
+  }
 }

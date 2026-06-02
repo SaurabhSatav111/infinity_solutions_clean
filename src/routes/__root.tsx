@@ -153,9 +153,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ScrollProgress />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
       <MobileCTA />
+      <BackToTopButton />
       <a
         href="https://wa.me/919326112233"
         target="_blank"
@@ -244,20 +246,114 @@ function MobileCTA() {
   };
 
   return (
-    <div className={showCTA ? "mobile-cta-bar is-visible" : "mobile-cta-bar"}>
-      <div className="mobile-cta-actions">
-        <a
-          className="mobile-cta-button whatsapp-button"
-          href="https://wa.me/919326112233"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          💬 WhatsApp Us
-        </a>
-        <button type="button" className="mobile-cta-button quote-button" onClick={scrollToContact}>
-          Get a Quote
-        </button>
+    <>
+      <div className={showCTA ? "mobile-cta-bar is-visible" : "mobile-cta-bar"}>
+        <div className="mobile-cta-actions">
+          <a
+            className="mobile-cta-button whatsapp-button"
+            href="https://wa.me/919326112233"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            💬 WhatsApp Us
+          </a>
+          <button type="button" className="mobile-cta-button quote-button" onClick={scrollToContact}>
+            Get a Quote
+          </button>
+        </div>
       </div>
+    </>
+  );
+}
+
+function ScrollProgress() {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    let rafId: number | null = null;
+
+    const updateProgress = () => {
+      const scrollY = window.scrollY;
+      const documentHeight = document.documentElement.scrollHeight;
+      const windowHeight = window.innerHeight;
+      const maxScroll = Math.max(documentHeight - windowHeight, 1);
+      const nextProgress = Math.min(100, Math.max(0, (scrollY / maxScroll) * 100));
+      setProgress(nextProgress);
+      rafId = null;
+    };
+
+    const onScroll = () => {
+      if (rafId === null) {
+        rafId = window.requestAnimationFrame(updateProgress);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    updateProgress();
+
+    return () => {
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  return (
+    <div className="scroll-progress-shell" aria-hidden="true">
+      <div className="scroll-progress-fill" style={{ width: `${progress}%` }} />
     </div>
+  );
+}
+
+function BackToTopButton() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    let rafId: number | null = null;
+
+    const updateVisibility = () => {
+      setVisible(window.scrollY > 400);
+      rafId = null;
+    };
+
+    const onScroll = () => {
+      if (rafId === null) {
+        rafId = window.requestAnimationFrame(updateVisibility);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    updateVisibility();
+
+    return () => {
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <button
+      type="button"
+      className={visible ? "back-to-top-button visible" : "back-to-top-button"}
+      onClick={scrollToTop}
+      aria-label="Back to top"
+    >
+      ↑
+    </button>
   );
 }
