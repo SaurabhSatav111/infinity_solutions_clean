@@ -167,7 +167,7 @@ export function Hero() {
             <StatCard target={500} suffix="+" label="Happy Clients" delay={150} />
             <StatCard target={9} suffix="" label="Services Offered" delay={300} />
             <StatCard target={100} suffix="%" label="Quality Assured" delay={450} />
-          </motion.div>
+          </div>
         </div>
 
         {/* 3D + floating cards */}
