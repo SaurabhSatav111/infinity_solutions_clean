@@ -1,10 +1,98 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState, useRef } from "react";
 
 const HeroScene = lazy(() =>
   import("./HeroScene").then((m) => ({ default: m.HeroScene })),
 );
+
+interface StatCardProps {
+  target: number;
+  suffix: string;
+  label: string;
+  delay: number;
+}
+
+function StatCard({ target, suffix, label, delay }: StatCardProps) {
+  const [count, setCount] = useState(0);
+  const [isPopping, setIsPopping] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
+      setCount(target);
+      return;
+    }
+
+    let animationFrameId: number;
+    let timeoutId: number;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          observer.disconnect();
+
+          timeoutId = window.setTimeout(() => {
+            let startTimestamp: number | null = null;
+            const duration = 2000;
+
+            const step = (timestamp: number) => {
+              if (!startTimestamp) startTimestamp = timestamp;
+              const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+              
+              // Easing: ease-out (starts fast, slows down at the end)
+              const easeProgress = 1 - Math.pow(1 - progress, 3);
+              const currentCount = Math.floor(easeProgress * target);
+              
+              setCount(currentCount);
+
+              if (progress < 1) {
+                animationFrameId = window.requestAnimationFrame(step);
+              } else {
+                setCount(target);
+                // Subtle pop scale effect
+                setIsPopping(true);
+                setTimeout(() => setIsPopping(false), 300);
+              }
+            };
+
+            animationFrameId = window.requestAnimationFrame(step);
+          }, delay);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+      if (timeoutId) window.clearTimeout(timeoutId);
+      if (animationFrameId) window.cancelAnimationFrame(animationFrameId);
+    };
+  }, [target, delay]);
+
+  return (
+    <div
+      ref={cardRef}
+      className="glass rounded-xl p-4 border border-primary/10 hover:border-primary/20 transition-all duration-300 flex flex-col justify-between"
+    >
+      <div
+        className="font-display text-2xl font-bold text-gradient-orange select-none transition-transform duration-300 inline-block origin-left"
+        style={{
+          transform: isPopping ? "scale(1.08)" : "scale(1)",
+        }}
+      >
+        {count}
+        {count === target ? suffix : ""}
+      </div>
+      <div className="text-xs text-muted-foreground mt-1.5 leading-snug">{label}</div>
+    </div>
+  );
+}
 
 export function Hero() {
   const [mounted, setMounted] = useState(false);
@@ -86,20 +174,10 @@ export function Hero() {
             transition={{ delay: 0.6, duration: 0.8 }}
             className="mt-12 grid grid-cols-2 sm:grid-cols-4 max-w-2xl gap-4"
           >
-            {[
-              { k: "20+", v: "Years of Experience" },
-              { k: "500+", v: "Happy Clients" },
-              { k: "9", v: "Services Offered" },
-              { k: "100%", v: "Quality Assured" },
-            ].map((s) => (
-              <div
-                key={s.v}
-                className="glass rounded-xl p-4 border border-primary/10 hover:border-primary/20 transition-all duration-300 flex flex-col justify-between"
-              >
-                <div className="font-display text-2xl font-bold text-gradient-orange">{s.k}</div>
-                <div className="text-xs text-muted-foreground mt-1.5 leading-snug">{s.v}</div>
-              </div>
-            ))}
+            <StatCard target={20} suffix="+" label="Years of Experience" delay={0} />
+            <StatCard target={500} suffix="+" label="Happy Clients" delay={150} />
+            <StatCard target={9} suffix="" label="Services Offered" delay={300} />
+            <StatCard target={100} suffix="%" label="Quality Assured" delay={450} />
           </motion.div>
         </div>
 
