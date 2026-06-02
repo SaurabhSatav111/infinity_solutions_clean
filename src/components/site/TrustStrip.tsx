@@ -3,12 +3,12 @@ import { Trophy, ShieldCheck, Leaf, Truck } from "lucide-react";
 
 export function TrustStrip() {
   const clients = [
-    "Pharma Company, Pune",
-    "FMCG Brand, Mumbai",
-    "Food Startup, Nashik",
-    "Retail Chain, Ahmedabad",
-    "E-Commerce Brand, Bangalore",
-    "Healthcare Co., Hyderabad",
+    { emoji: "💊", text: "Pharma Company, Pune" },
+    { emoji: "🛒", text: "FMCG Brand, Mumbai" },
+    { emoji: "🍔", text: "Food Startup, Nashik" },
+    { emoji: "📦", text: "Retail Chain, Ahmedabad" },
+    { emoji: "🛍️", text: "E-Commerce Brand, Bangalore" },
+    { emoji: "🏥", text: "Healthcare Co., Hyderabad" },
   ];
 
   const badges = [
@@ -44,20 +44,42 @@ export function TrustStrip() {
           </h3>
         </Reveal>
 
-        {/* Horizontal Logo Strip */}
-        <Reveal delay={0.05} className="mt-8">
-          <div className="flex overflow-x-auto gap-4 py-3 no-scrollbar scroll-smooth justify-start lg:justify-center -mx-6 px-6">
-            {clients.map((c, idx) => (
-              <div
-                key={idx}
-                className="shrink-0 px-6 py-3.5 rounded-xl border border-border/40 bg-card text-xs sm:text-sm font-medium text-muted-foreground/80 shadow-sm hover:border-primary/20 transition-all duration-300 flex items-center justify-center whitespace-nowrap"
-              >
-                {c}
-              </div>
-            ))}
-          </div>
-          <div className="text-center text-[11px] text-muted-foreground/60 italic mt-3">
-            Client logos will be updated with permission.
+        {/* Horizontal Logo Strip - Auto-scrolling Marquee */}
+        <Reveal delay={0.05} className="mt-8 relative -mx-6 px-6">
+          <style>{`
+            @keyframes marquee {
+              0% { transform: translateX(0%); }
+              100% { transform: translateX(-50%); }
+            }
+            .marquee-track {
+              display: flex;
+              width: max-content;
+              gap: 16px;
+              animation: marquee 30s linear infinite;
+              will-change: transform;
+            }
+            .marquee-track:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
+
+          {/* Fade masks */}
+          <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-surface via-surface/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-surface via-surface/80 to-transparent z-10 pointer-events-none" />
+
+          <div className="overflow-hidden py-4 relative">
+            <div className="marquee-track">
+              {/* Double the list of items for seamless looping */}
+              {[...clients, ...clients].map((c, idx) => (
+                <div
+                  key={idx}
+                  className="shrink-0 px-4 py-3 rounded-xl border border-border/40 bg-white text-[13px] font-medium text-muted-foreground/80 shadow-sm hover:border-primary/20 hover:scale-[1.02] transition-all duration-300 flex items-center gap-3 whitespace-nowrap select-none"
+                >
+                  <span className="text-base select-none">{c.emoji}</span>
+                  <span>{c.text}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </Reveal>
 
@@ -90,3 +112,4 @@ export function TrustStrip() {
     </section>
   );
 }
+

@@ -40,11 +40,11 @@ function StatCard({ target, suffix, label, delay }: StatCardProps) {
             const step = (timestamp: number) => {
               if (!startTimestamp) startTimestamp = timestamp;
               const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-              
+
               // Easing: ease-out (starts fast, slows down at the end)
               const easeProgress = 1 - Math.pow(1 - progress, 3);
               const currentCount = Math.floor(easeProgress * target);
-              
+
               setCount(currentCount);
 
               if (progress < 1) {
@@ -158,7 +158,7 @@ export function Hero() {
                 View Our Services
               </a>
             </div>
-            
+
             <div className="text-xs text-muted-foreground/80 flex flex-wrap items-center gap-x-3 gap-y-1 font-semibold">
               <span>✅ No minimum order pressure</span>
               <span className="text-muted-foreground/30">|</span>
