@@ -150,6 +150,37 @@
       linear-gradient(90deg, oklch(0.22 0.03 220 / 0.05) 1px, transparent 1px);
     background-size: 56px 56px;
   }
+  .input-prefix {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: rgba(148, 163, 184, 1);
+    font-size: 0.82rem;
+    font-weight: 600;
+    pointer-events: none;
+  }
+
+  .select-arrow {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: rgba(148, 163, 184, 1);
+    font-size: 0.85rem;
+  }
+
+  .validation-check {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    color: #10b981;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
   .noise {
     position: relative;
   }
