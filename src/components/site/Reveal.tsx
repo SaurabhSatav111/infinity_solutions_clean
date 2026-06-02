@@ -1,10 +1,4 @@
-import { motion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
-
-const variants: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
-};
 
 export function Reveal({
   children,
@@ -15,17 +9,12 @@ export function Reveal({
   delay?: number;
   className?: string;
 }) {
+  const classes = ["animate-on-scroll", className].filter(Boolean).join(" ");
+
   return (
-    <motion.div
-      variants={variants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ delay }}
-      className={className}
-    >
+    <div className={classes} style={{ transitionDelay: `${delay}s` }}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 

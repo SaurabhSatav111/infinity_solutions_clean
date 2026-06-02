@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 function NotFoundComponent() {
   return (
@@ -105,6 +106,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js');" }} />
         <HeadContent />
         <script
           type="application/ld+json"
@@ -145,6 +147,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  useScrollReveal();
   const { queryClient } = Route.useRouteContext();
 
   return (

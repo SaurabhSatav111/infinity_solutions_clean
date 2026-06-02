@@ -166,6 +166,28 @@
     50% { transform: translateY(-14px) }
   }
   .animate-float { animation: float-slow 6s ease-in-out infinite; }
+  .animate-bounce-slow {
+    animation: float-bounce 2.2s ease-in-out infinite;
+  }
+  @keyframes float-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+  html.js .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  html.js .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (max-width: 640px) {
+    html.js .animate-on-scroll {
+      transform: translateY(14px);
+    }
+  }
   @keyframes glow-pulse {
     0%,100% { opacity: 0.6; transform: scale(1); }
     50% { opacity: 1; transform: scale(1.05); }

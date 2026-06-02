@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { lazy, Suspense, useEffect, useState, useRef } from "react";
 
@@ -111,38 +110,30 @@ export function Hero() {
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
         <div className="relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass text-xs font-semibold text-muted-foreground mb-8"
+          <div
+            className="animate-on-scroll inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass text-xs font-semibold text-muted-foreground mb-8"
+            style={{ transitionDelay: "0.05s" }}
           >
             Pune's Trusted Packaging Partner Since 2004
-          </motion.div>
+          </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.05 }}
-            className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.02] tracking-tight"
+          <h1
+            className="animate-on-scroll font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.02] tracking-tight"
+            style={{ transitionDelay: "0.1s" }}
           >
             Premium <span className="text-gradient-orange">Packaging & Printing</span> Solutions for Growing Brands
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.18 }}
-            className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed"
+          <p
+            className="animate-on-scroll mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed"
+            style={{ transitionDelay: "0.18s" }}
           >
             Infinity Solutions is Pune's one-stop packaging and printing manufacturer — delivering monocartons, corrugated boxes, flexible printing, rigid boxes and branding solutions with 20+ years of expertise. Serving pharma, FMCG, food and retail businesses across India.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="mt-9 flex flex-col gap-5"
+          <div
+            className="animate-on-scroll mt-9 flex flex-col gap-5"
+            style={{ transitionDelay: "0.3s" }}
           >
             <div className="flex flex-wrap gap-3">
               <a
@@ -166,13 +157,11 @@ export function Hero() {
               <span className="text-muted-foreground/30">|</span>
               <span>✅ Response within 2 hours</span>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-12 grid grid-cols-2 sm:grid-cols-4 max-w-2xl gap-4"
+          <div
+            className="animate-on-scroll mt-12 grid grid-cols-2 sm:grid-cols-4 max-w-2xl gap-4"
+            style={{ transitionDelay: "0.4s" }}
           >
             <StatCard target={20} suffix="+" label="Years of Experience" delay={0} />
             <StatCard target={500} suffix="+" label="Happy Clients" delay={150} />
@@ -193,15 +182,13 @@ export function Hero() {
         </div>
       </div>
 
-      <motion.a
+      <a
         href="#about"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 8, 0] }}
-        transition={{ delay: 1, y: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground text-xs uppercase tracking-widest"
+        className="animate-on-scroll animate-bounce-slow absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground text-xs uppercase tracking-widest"
+        style={{ transitionDelay: "0.6s" }}
       >
         Scroll <ChevronDown className="w-4 h-4 text-primary" />
-      </motion.a>
+      </a>
     </section>
   );
 }
